@@ -16,7 +16,6 @@ const routes = [
     name: 'main',
     component: MainView
   },
-
 ]
 
 const router = new VueRouter({
