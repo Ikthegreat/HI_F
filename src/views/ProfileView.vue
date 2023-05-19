@@ -1,29 +1,25 @@
 <template>
-  <div id="main">
+  <div>
     <NavBar />
-    <MovieList />
-
+    <router-link :to="{ name: 'main' }">메인 화면으로</router-link>
+    <h1>프로필입니다</h1>
     <router-view />
   </div>
 </template>
 
 <script>
-import MovieList from "@/components/MovieList";
 import NavBar from "@/components/NavBar";
 
 export default {
-  name: "MainView",
+  name: "ProfileView",
   components: {
-    MovieList,
     NavBar,
   },
 };
 </script>
 
 <style scoped>
-#main {
-  background-color: #1f1f1f;
-  height: 100%;
-  padding-top: 80px;
+h1 {
+  padding-top: 100px;
 }
 </style>

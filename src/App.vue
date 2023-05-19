@@ -11,7 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  background-color: #161616;
+  background-color: #1f1f1f;
   width: 100%;
   height: 100%;
   /* justify-content: center; */

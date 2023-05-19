@@ -43,15 +43,15 @@ export default new Vuex.Store({
         }
       }).then(result => {
         context.commit('LOG_IN', result.data.key)
-        router.push('/main')
+        router.push('/')
       }).catch(error => {
-        console.log(error)
         console.log(error.response.data)
       })
     },
     logIn(context, payload) {
       const username = payload.username
       const password = payload.password
+
       axios({
         method: 'post',
         url: `${Server_URL}/accounts/login/`,
@@ -60,8 +60,10 @@ export default new Vuex.Store({
         }
       }).then(result => {
         context.commit('LOG_IN', result.data.key)
-        router.push('/main')
-      }).catch(error => console.log(error))
+        router.push('/')
+      }).catch(error => {
+        console.log(error)
+      })
     },
     logOut(context) {
       context.commit('LOG_OUT')
@@ -70,3 +72,4 @@ export default new Vuex.Store({
   modules: {
   }
 })
+

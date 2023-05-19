@@ -1,7 +1,11 @@
 <template>
   <div id="card">
     <b-card img-top>
-      <b-card-img id="card-img" :src="getPosterURL(movie.fields.poster_path)" />
+      <b-card-img
+        id="card-img"
+        :src="getPosterURL(movie.fields.poster_path)"
+        @click="moveToDetail(movie.pk)"
+      />
     </b-card>
   </div>
 </template>
@@ -9,11 +13,16 @@
 <script>
 export default {
   name: "MovieListItem",
-  data() {},
   props: {
     movie: Object,
   },
+  data() {
+    return {};
+  },
   methods: {
+    moveToDetail(movieId) {
+      this.$router.push("/" + movieId);
+    },
     getPosterURL(posterPath) {
       return `https://image.tmdb.org/t/p/w500${posterPath}`;
     },
@@ -24,7 +33,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #card {
-  width: 100px;
+  width: 150px;
 }
 
 #card-img {
