@@ -14,7 +14,8 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    token: null
+    token: null,
+    movies: [],
   },
   getters: {
     isLogin(state) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     LOG_OUT(state) {
       state.token = null
+    },
+    GET_MAIN(state, movies) {
+      state.movies = movies
     }
   },
   actions: {
@@ -67,7 +71,27 @@ export default new Vuex.Store({
     },
     logOut(context) {
       context.commit('LOG_OUT')
-    }
+    },
+    getMain(context) {
+      axios({
+        method: 'get',
+        url: `${Server_URL}/main/`
+      }).then(response => {
+        context.commit('GET_MAIN', response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    // getDetail(context) {
+    //   axios({
+    //     method: 'get',
+    //     url: `${Server_URL}/main/`
+    //   }).then(result => {
+    //     console.log(result, context)
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // }
   },
   modules: {
   }

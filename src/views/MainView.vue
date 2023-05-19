@@ -1,8 +1,12 @@
 <template>
   <div id="main">
     <NavBar />
-    <MovieList />
-
+    <MovieList
+      v-for="(value, index) in movies"
+      :movieListTag="movieListTag[index]"
+      :key="index"
+      :movies="value"
+    />
     <router-view />
   </div>
 </template>
@@ -16,6 +20,20 @@ export default {
   components: {
     MovieList,
     NavBar,
+  },
+  methods: {
+    getMain() {
+      this.$store.dispatch("getMain");
+    },
+  },
+  created() {
+    this.getMain();
+  },
+  data() {
+    return {
+      movies: this.$store.state.movies,
+      movieListTag: ["UpComing", "NowPlaying"],
+    };
   },
 };
 </script>

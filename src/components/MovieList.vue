@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>{{ movieListTag }}</h1>
     <div class="movie-list">
       <MovieListItem
         v-for="(movie, index) in movies"
@@ -11,7 +12,6 @@
 </template>
 
 <script>
-import data from "../../../final-pjt-back/movies/movies_data2.json";
 import MovieListItem from "./MovieListItem";
 
 export default {
@@ -20,12 +20,11 @@ export default {
     MovieListItem,
   },
   data() {
-    return {
-      movies: data,
-    };
+    return {};
   },
   props: {
-    msg: String,
+    movies: Array,
+    movieListTag: String,
   },
 };
 </script>

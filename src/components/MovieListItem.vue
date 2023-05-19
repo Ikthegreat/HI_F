@@ -3,8 +3,8 @@
     <b-card img-top>
       <b-card-img
         id="card-img"
-        :src="getPosterURL(movie.fields.poster_path)"
-        @click="moveToDetail(movie.pk)"
+        :src="getPosterURL(movie.poster_path)"
+        @click="moveToDetail(movie.id)"
       />
     </b-card>
   </div>

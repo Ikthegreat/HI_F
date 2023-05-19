@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <b-navbar fixed="top">
-      <b-navbar-nav id="toMain">
+      <b-navbar-nav id="toMain" @click="ifNowMain">
         <router-link :to="{ name: 'main' }"> sMovieR </router-link>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
@@ -20,6 +20,18 @@
 export default {
   name: "NavBar",
   components: {},
+  data() {
+    return {
+      nowPage: this.$route.params,
+    };
+  },
+  methods: {
+    ifNowMain() {
+      if (this.nowPage) {
+        this.$router.go(0);
+      }
+    },
+  },
 };
 </script>
 
