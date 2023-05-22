@@ -1,12 +1,14 @@
 <template>
   <div id="main">
     <NavBar />
-    <MovieList
-      v-for="(value, index) in movies"
-      :movieListTag="movieListTag[index]"
-      :key="index"
-      :movies="value"
-    />
+    <div id="padding-scroll-content" class="square">
+      <MovieList
+        v-for="(value, index) in movies"
+        :movieListTag="movieListTag[index]"
+        :key="index"
+        :movies="value"
+      />
+    </div>
   </div>
 </template>
 
@@ -32,6 +34,7 @@ export default {
     return {
       movies: this.$store.state.movies,
       movieListTag: ["UpComing", "NowPlaying"],
+      active: "guide",
     };
   },
 };
@@ -39,7 +42,6 @@ export default {
 
 <style scoped>
 #main {
-  background-color: #1f1f1f;
   height: 100%;
 }
 </style>

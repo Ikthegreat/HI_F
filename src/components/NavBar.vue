@@ -1,34 +1,45 @@
 <template>
-  <div class="navbar">
-    <b-navbar fixed="top">
-      <b-navbar-nav id="toMain" @click="ifNowMain">
-        <router-link :to="{ name: 'main' }"> sMovieR </router-link>
-      </b-navbar-nav>
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item>
-          <router-link :to="{ name: 'profile' }"> 프로필 </router-link>
-        </b-nav-item>
-        <b-nav-item>
-          <router-link :to="{ name: 'logout' }"> 로그아웃 </router-link>
-        </b-nav-item>
-      </b-navbar-nav>
-    </b-navbar>
+  <div class="center examplex">
+    <vs-navbar id="navbar" padding-scroll square text-white :color="active" fixed center-collapsed v-model="active">
+      <template #left>
+        <vs-button icon id="toMain" @click="ifNowMain" success>
+          <i class="bx bx-home-alt"></i>Main
+        </vs-button>
+      </template>
+      <template #right>
+        <router-link :to="{ name: 'profile' }">
+          <vs-button success>
+            Profile
+          </vs-button>
+        </router-link>
+        <router-link :to="{ name: 'logout' }">
+          <vs-button flat success>
+            Logout
+          </vs-button>
+        </router-link>
+      </template>
+    </vs-navbar>
   </div>
 </template>
 
 <script>
 export default {
   name: "NavBar",
-  components: {},
+  components: {
+  },
   data() {
     return {
-      nowPage: this.$route.params,
+      nowPage: this.$route.path,
+      active: 'guide',
     };
   },
   methods: {
     ifNowMain() {
-      if (this.nowPage) {
+      if (this.nowPage === '/') {
         this.$router.go(0);
+      }
+      else {
+        this.$router.push('/')
       }
     },
   },
@@ -37,16 +48,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.navbar {
-  background-color: #1f1f1f;
-}
-#toMain {
+/* #toMain {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
-}
+} */
 
-#LOGO {
-  height: 50px;
+#navbar {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  background-color: ;
 }
 </style>

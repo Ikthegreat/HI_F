@@ -12,9 +12,11 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
+    "material-icons": "^1.13.6",
     "vue": "^2.7.14",
     "vue-navigation-bar": "^4.1.0",
     "vue-router": "^3.5.1",
+    "vuesax": "^4.0.1-alpha.25",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
   },

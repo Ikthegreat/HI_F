@@ -1,8 +1,6 @@
 <template>
   <div id="card">
-    <!-- <b-card img-top> -->
     <img id="card-img" :src="movieImgURL" @click="moveToDetail(movie.id)" />
-    <!-- </b-card> -->
   </div>
 </template>
 
@@ -39,7 +37,7 @@ export default {
 
 #card-img {
   width: 150px;
-  height: 220px;
+  height: 500px;
   object-fit: contain;
 }
 ul {
