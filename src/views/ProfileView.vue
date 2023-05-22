@@ -3,7 +3,7 @@
     <NavBar />
     <h1>{{ userName }} 님의 프로필</h1>
     <img
-      :src="userProfileData.profileimage"
+      :src="profileImageURL"
       alt=""
       v-if="userProfileData.profileimage"
     />
@@ -43,6 +43,9 @@ export default {
     userProfileData() {
       return this.$store.state.profileData;
     },
+    profileImageURL() {
+      return `${Server_URL}${this.$store.state.profileData.profileimage}`
+    } 
   },
   methods: {
     imgChange(event) {
@@ -71,9 +74,9 @@ export default {
           console.log(error);
         });
     },
-    getProfileImg() {
-      return this.profileImageURL;
-    },
+    // getProfileImg() {
+      //   return this.profileImageURL;
+    // },
   },
   created() {
     this.getProfile();
