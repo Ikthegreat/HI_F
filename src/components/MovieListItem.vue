@@ -1,12 +1,8 @@
 <template>
   <div id="card">
-    <b-card img-top>
-      <b-card-img
-        id="card-img"
-        :src="getPosterURL(movie.poster_path)"
-        @click="moveToDetail(movie.id)"
-      />
-    </b-card>
+    <!-- <b-card img-top> -->
+    <img id="card-img" :src="movieImgURL" @click="moveToDetail(movie.id)" />
+    <!-- </b-card> -->
   </div>
 </template>
 
@@ -17,15 +13,20 @@ export default {
     movie: Object,
   },
   data() {
-    return {};
+    return {
+      movieImgURL: "",
+    };
   },
   methods: {
     moveToDetail(movieId) {
-      this.$router.push("/" + movieId);
+      this.$router.push("/movie/" + movieId);
     },
     getPosterURL(posterPath) {
-      return `https://image.tmdb.org/t/p/w500${posterPath}`;
+      this.movieImgURL = `https://image.tmdb.org/t/p/w500${posterPath}`;
     },
+  },
+  created() {
+    this.getPosterURL(this.movie.poster_path);
   },
 };
 </script>
@@ -37,7 +38,8 @@ export default {
 }
 
 #card-img {
-  height: 100%;
+  width: 150px;
+  height: 220px;
   object-fit: contain;
 }
 ul {

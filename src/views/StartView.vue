@@ -6,8 +6,6 @@
       <router-link :to="{ name: 'login' }">Login</router-link> |
       <router-link :to="{ name: 'signup' }">Sign Up</router-link>
     </div>
-
-    <router-view />
   </div>
 </template>
 

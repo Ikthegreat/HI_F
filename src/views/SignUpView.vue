@@ -3,6 +3,11 @@
     <h1>Sign Up</h1>
     <form @submit.prevent="signUp">
       <div>
+        <label for="userid">ID : </label>
+        <input type="text" id="userid" v-model="userid" />
+      </div>
+
+      <div>
         <label for="username">Username : </label>
         <input type="text" id="username" v-model="username" />
       </div>
@@ -27,19 +32,21 @@ export default {
   name: "SignUpView",
   data() {
     return {
+      userid: "",
       username: "",
-      email: "",
       password1: "",
       password2: "",
     };
   },
   methods: {
     signUp() {
+      const userid = this.userid;
       const username = this.username;
       const password1 = this.password1;
       const password2 = this.password2;
 
       const payload = {
+        userid,
         username,
         password1,
         password2,

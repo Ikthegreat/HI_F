@@ -16,6 +16,9 @@ export default new Vuex.Store({
   state: {
     token: null,
     movies: [],
+    movieData: null,
+    loginUser: "",
+    profileData: null,
   },
   getters: {
     isLogin(state) {
@@ -23,30 +26,40 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    LOG_IN(state, token) {
+    LOG_IN(state, { token, username }) {
       state.token = token
+      state.loginUser = username
     },
     LOG_OUT(state) {
       state.token = null
+      state.loginUser = ""
     },
     GET_MAIN(state, movies) {
       state.movies = movies
+    },
+    GET_DETAIL(state, data) {
+      state.movieData = data
+    },
+    GET_PROFILE(state, data) {
+      state.profileData = data
     }
   },
   actions: {
     signUp(context, payload) {
+      const userid = payload.userid
       const username = payload.username
       const password1 = payload.password1
       const password2 = payload.password2
+      // const profileimage = payload.profileimage
 
       axios({
         method: 'post',
         url: `${Server_URL}/accounts/signup/`,
         data: {
-          username, password1, password2
+          userid, username, password1, password2,
         }
       }).then(result => {
-        context.commit('LOG_IN', result.data.key)
+        context.commit('LOG_IN', { token: result.data.key, username: username })
         router.push('/')
       }).catch(error => {
         console.log(error.response.data)
@@ -63,8 +76,9 @@ export default new Vuex.Store({
           username, password
         }
       }).then(result => {
-        context.commit('LOG_IN', result.data.key)
+        context.commit('LOG_IN', { token: result.data.key, username: username })
         router.push('/')
+        router.go(0)
       }).catch(error => {
         console.log(error)
       })
@@ -82,16 +96,26 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-    // getDetail(context) {
-    //   axios({
-    //     method: 'get',
-    //     url: `${Server_URL}/main/`
-    //   }).then(result => {
-    //     console.log(result, context)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // }
+    getDetail(context, movieId) {
+      axios({
+        method: 'get',
+        url: `${Server_URL}/main/${movieId}/`
+      }).then(response => {
+        context.commit('GET_DETAIL', response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    getProfile(context, userName) {
+      axios({
+        method: 'get',
+        url: `${Server_URL}/profile/${userName}/`
+      }).then(response => {
+        context.commit('GET_PROFILE', response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
   },
   modules: {
   }

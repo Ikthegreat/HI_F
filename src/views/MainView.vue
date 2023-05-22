@@ -7,7 +7,6 @@
       :key="index"
       :movies="value"
     />
-    <router-view />
   </div>
 </template>
 
@@ -42,6 +41,5 @@ export default {
 #main {
   background-color: #1f1f1f;
   height: 100%;
-  padding-top: 80px;
 }
 </style>

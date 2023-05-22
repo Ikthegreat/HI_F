@@ -11,21 +11,21 @@
             {{ movieData.title }}
           </h1>
           <h3>{{ movieData.released_date }}</h3>
+          <h5>평점 : {{ movieData.vote_average }}</h5>
           <progress :value="movieData.vote_average" max="10"></progress>
-          <h5>{{ movieData.vote_average }}</h5>
-          <h6>{{ movieData.overview }}</h6>
+          <h6 v-if="movieData.overview">{{ movieData.overview }}</h6>
+          <h6 v-else>등록된 줄거리가 없습니다</h6>
         </b-col>
       </b-row>
     </b-container>
-    <router-view />
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar";
-import axios from "axios";
+// import axios from "axios";
 
-const Server_URL = "http://127.0.0.1:8000";
+// const Server_URL = "http://127.0.0.1:8000";
 
 export default {
   name: "MovieDetailView",
@@ -34,27 +34,47 @@ export default {
   },
   data() {
     return {
-      movieId: null,
-      movieData: "",
+      // movieId: this.$route.params.movieId,
     };
   },
-  mounted() {
-    this.movieId = this.$route.params.movieid;
-    this.getMovieDetail();
+  computed: {
+    movieData() {
+      return this.$store.state.movieData;
+    },
+    movieId() {
+      return this.$route.params.movieid;
+    },
+  },
+  created() {
+    this.getDetail();
+    // this.movieId = this.$route.params.movieid;
+    // this.getMovieDetail();
   },
   methods: {
-    getMovieDetail() {
-      axios({
-        method: "get",
-        url: `${Server_URL}/main/${this.movieId}`,
-      })
-        .then((response) => {
-          this.movieData = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    getDetail() {
+      this.$store.dispatch("getDetail", this.movieId);
     },
+    // getMovieDetail() {
+    //   const options = {
+    //     method: "GET",
+    //     headers: {
+    //       accept: "application/json",
+    //       Authorization:
+    //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YzQyNzExMDBjM2FjZGYyOTAxYTkxMjhiYjY4NzMwNiIsInN1YiI6IjYzZDIwNWMwNjZhZTRkMDA4YzkyMjMwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YcFHsAOJFOrOfOc0gBh22Q8y2_PaJOT3LCnLb0yerjc",
+    //     },
+    //   };
+    //   axios
+    //     .get(
+    //       `https://api.themoviedb.org/3/movie/${this.movieId}?language=ko`,
+    //       options
+    //     )
+    //     .then((response) => {
+    //       this.movieData = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // },
     getPosterURL(posterPath) {
       return `https://image.tmdb.org/t/p/w500${posterPath}`;
     },
@@ -63,7 +83,4 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  padding-top: 100px;
-}
 </style>
