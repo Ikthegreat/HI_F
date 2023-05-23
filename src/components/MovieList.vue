@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ movieListTag }}</h1>
+    <h3>{{ movieListTag }}</h3>
     <div class="movie-list">
       <MovieListItem
         v-for="(movie, index) in movies"
@@ -37,18 +37,14 @@ export default {
   justify-content: center;
   gap: 1rem;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
+}
+h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: start;
+  font-weight: bold;
+  color: white;
 }
 </style>

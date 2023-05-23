@@ -11,13 +11,13 @@
       v-model="active"
     >
       <template #left>
-        <vs-button icon id="toMain" @click="ifNowMain" success>
+        <vs-button icon id="toMain" @click="ifNowMain" warn>
           <i class="bx bx-home-alt-2"> Main</i>
         </vs-button>
       </template>
       <template #right>
         <router-link :to="{ name: 'profile' }" class="no-underline">
-          <vs-button success>
+          <vs-button warn>
             <i class="bx bx-user"> Profile</i>
           </vs-button>
         </router-link>
@@ -66,5 +66,7 @@ export default {
   background-image: url(../assets/Navbar.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  /* background-color: black; */
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="logout">
     <h1>이용해주셔서 감사합니다.</h1>
-    <router-link :to="{ name: 'start' }">처음 화면으로</router-link>
+    <router-link id="link" :to="{ name: 'start' }">처음 화면으로</router-link>
   </div>
 </template>
 
@@ -16,8 +16,12 @@ export default {
 
 <style scoped>
 .logout {
-  height: 1000px;
-  justify-content: center;
-  align-items: center;
+  width: 500px;
+  height: 300px;
+  color: white;
+}
+#link {
+  text-decoration: none;
+  color: white;
 }
 </style>

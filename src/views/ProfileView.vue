@@ -1,51 +1,43 @@
 <template>
   <div>
     <NavBar />
-    <vs-row
-      class="mh"
-      align="center"
-      justify="space-between"
-      direction="column"
-    >
-      <vs-col w="12">
+    <b-row>
+      <b-col id="profile">
         <h1>{{ userName }} 님의 프로필</h1>
-      </vs-col>
-      <vs-col w="12">
+
         <img
           :src="profileImageURL"
           alt=""
           v-if="userProfileData.profileimage"
         />
         <img src="..\src\assets\default.jpg" alt="" v-else />
-      </vs-col>
 
-      <vs-col :offset="2" w="1">
         <vs-button success border @click="active = !active"> Change </vs-button>
-      </vs-col>
+      </b-col>
+    </b-row>
 
-      <vs-dialog width="300px" center v-model="active">
-        <div class="con-content">
-          <form @submit.prevent="updateImage" class="center">
-            <vs-input
-              success
-              border
-              type="file"
-              id="profileimage"
-              accept="image/*"
-              @change="imgChange"
-            />
-            <vs-button success>Update</vs-button>
-          </form>
+    <vs-dialog width="300px" center v-model="active">
+      <div class="con-content">
+        <form @submit.prevent="updateImage" class="center">
+          <vs-input
+            success
+            border
+            type="file"
+            id="profileimage"
+            accept="image/*"
+            @change="imgChange"
+          />
+          <vs-button success>Update</vs-button>
+        </form>
+      </div>
+      <template #footer>
+        <div class="con-footer">
+          <vs-button @click="active = false" dark transparent>
+            Cancel
+          </vs-button>
         </div>
-        <template #footer>
-          <div class="con-footer">
-            <vs-button @click="active = false" dark transparent>
-              Cancel
-            </vs-button>
-          </div>
-        </template>
-      </vs-dialog>
-    </vs-row>
+      </template>
+    </vs-dialog>
   </div>
 </template>
 

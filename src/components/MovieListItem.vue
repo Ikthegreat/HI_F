@@ -31,13 +31,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#card {
-  width: 150px;
-}
-
 #card-img {
-  width: 150px;
-  height: 500px;
+  width: 100%;
+  height: 230px;
   object-fit: contain;
 }
 ul {

@@ -1,54 +1,52 @@
 <template>
-  <div class="center grid">
-    <vs-row :w="12">
-      <vs-col id="container" :offset="4" :w="4">
-        <template header>
-          <h4 class="mb-3">Hello!</h4>
-        </template>
-        <form @submit.prevent="logIn">
-          <div class="con-form">
-            <vs-input
-              border
-              success
-              id="userid"
-              v-model="userid"
-              placeholder="ID"
-            >
-              <template #icon>
-                <i class="bx bx-user"></i>
-              </template>
-            </vs-input>
-            <vs-input
-              border
-              success
-              type="password"
-              v-model="password"
-              placeholder="Password"
-            >
-              <template #icon>
-                <i class="bx bx-lock-alt"></i>
-              </template>
-            </vs-input>
-            <div class="flex">
-              <vs-checkbox success v-model="remember">Remember me</vs-checkbox>
+  <div>
+    <div id="container">
+      <template header>
+        <h4 class="mb-3">Hello!</h4>
+      </template>
+      <form @submit.prevent="logIn">
+        <div class="con-form">
+          <vs-input
+            border
+            success
+            id="userid"
+            v-model="userid"
+            placeholder="ID"
+          >
+            <template #icon>
+              <i class="bx bx-user"></i>
+            </template>
+          </vs-input>
+          <vs-input
+            border
+            success
+            type="password"
+            v-model="password"
+            placeholder="Password"
+          >
+            <template #icon>
+              <i class="bx bx-lock-alt"></i>
+            </template>
+          </vs-input>
+          <div class="flex">
+            <vs-checkbox success v-model="remember">Remember me</vs-checkbox>
+          </div>
+        </div>
+
+        <template footer>
+          <div class="footer-dialog">
+            <vs-button success type="submit" block> Log In </vs-button>
+
+            <div class="new">
+              New Here?
+              <router-link :to="{ name: 'signup' }"
+                >Create New Account</router-link
+              >
             </div>
           </div>
-
-          <template footer>
-            <div class="footer-dialog">
-              <vs-button success type="submit" block> Log In </vs-button>
-
-              <div class="new">
-                New Here?
-                <router-link :to="{ name: 'signup' }"
-                  >Create New Account</router-link
-                >
-              </div>
-            </div>
-          </template>
-        </form>
-      </vs-col>
-    </vs-row>
+        </template>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -90,6 +88,7 @@ i {
 }
 #container {
   background-color: white;
+  width: 300px;
   padding: 20px;
   padding-left: 10px;
   border-radius: 5%;

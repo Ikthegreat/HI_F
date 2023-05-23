@@ -1,35 +1,50 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :class="{
+      isLogined: isLogined,
+      isnotLogined: !isLogined,
+    }"
+  >
     <router-view />
   </div>
 </template>
 
 <script>
+import store from "./store/index";
+
 export default {
   name: "App",
   components: {},
+  computed: {
+    isLogined() {
+      return store.getters.isLogin;
+    },
+  },
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: black;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  /* justify-content: center; */
-  align-items: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  font-family: "GowunDodum";
+  height: 937px;
 
-  background-image: url(./assets/Navbar.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: 100px;
+  padding-bottom: 100px; */
+  font-family: "GowunDodum";
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+}
+.isLogined {
+  background-image: url(./assets/BackGround_isLogined.jpg);
+  padding-top: 100px;
+}
+.isnotLogined {
+  background-image: url(./assets/BackGround.jpg);
 }
 
 @font-face {
