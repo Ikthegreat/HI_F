@@ -1,20 +1,29 @@
 <template>
   <div class="center examplex">
-    <vs-navbar id="navbar" padding-scroll square text-white :color="active" fixed center-collapsed v-model="active">
+    <vs-navbar
+      id="navbar"
+      padding-scroll
+      square
+      text-white
+      :color="active"
+      fixed
+      center-collapsed
+      v-model="active"
+    >
       <template #left>
         <vs-button icon id="toMain" @click="ifNowMain" success>
-          <i class="bx bx-home-alt"></i>Main
+          <i class="bx bx-home-alt-2"> Main</i>
         </vs-button>
       </template>
       <template #right>
-        <router-link :to="{ name: 'profile' }">
+        <router-link :to="{ name: 'profile' }" class="no-underline">
           <vs-button success>
-            Profile
+            <i class="bx bx-user"> Profile</i>
           </vs-button>
         </router-link>
-        <router-link :to="{ name: 'logout' }">
-          <vs-button flat success>
-            Logout
+        <router-link :to="{ name: 'logout' }" class="no-underline">
+          <vs-button id="logOutBtn">
+            <i class="bx bx-log-out"> Logout</i>
           </vs-button>
         </router-link>
       </template>
@@ -25,21 +34,19 @@
 <script>
 export default {
   name: "NavBar",
-  components: {
-  },
+  components: {},
   data() {
     return {
       nowPage: this.$route.path,
-      active: 'guide',
+      active: "guide",
     };
   },
   methods: {
     ifNowMain() {
-      if (this.nowPage === '/') {
+      if (this.nowPage === "/") {
         this.$router.go(0);
-      }
-      else {
-        this.$router.push('/')
+      } else {
+        this.$router.push("/");
       }
     },
   },
@@ -48,15 +55,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* #toMain {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 25px;
-  color: white;
-} */
-
+.no-underline {
+  text-decoration: none;
+}
+#logOutBtn {
+  color: #46c93a;
+  background-color: white;
+}
 #navbar {
-  border-bottom: 10px;
-  border-bottom-style: solid;
-  background-color: ;
+  background-image: url(../assets/Navbar.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

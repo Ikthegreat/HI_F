@@ -7,25 +7,46 @@
           <img :src="getPosterURL(movieData.poster_path)" alt="" />
         </b-col>
         <b-col>
-          <h1>
+          <h3 class="mt-5 mb-3">
             {{ movieData.title }}
-          </h1>
-          <h3>{{ movieData.released_date }}</h3>
-          <h5>평점 : {{ movieData.vote_average }}</h5>
-          <progress :value="movieData.vote_average" max="10"></progress>
+          </h3>
+          <h5 v-if="movieData.released_date">
+            개봉일 : {{ movieData.released_date }}
+          </h5>
+          <div v-if="movieData.vote_average">
+            <b-progress :max="max" height="2rem" class="w-50 mb-2">
+              <b-progress-bar :value="value">
+                <span
+                  >평점 : <strong>{{ value }} / {{ max }}</strong></span
+                >
+              </b-progress-bar>
+            </b-progress>
+          </div>
           <h6 v-if="movieData.overview">{{ movieData.overview }}</h6>
           <h6 v-else>등록된 줄거리가 없습니다</h6>
         </b-col>
       </b-row>
     </b-container>
+
+    <vs-button @click="likeMovie"> Like </vs-button>
+
+    <!-- <div class="center con-avatars">
+      <vs-avatar-group max="3">
+        <div v-for="(user, index) in likedUser" :key="index">
+          <vs-avatar>
+            <img src="/avatars/avatar-1.png" alt="" />
+          </vs-avatar>
+        </div>
+      </vs-avatar-group>
+    </div> -->
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar";
-// import axios from "axios";
+import axios from "axios";
 
-// const Server_URL = "http://127.0.0.1:8000";
+const Server_URL = "http://127.0.0.1:8000";
 
 export default {
   name: "MovieDetailView",
@@ -34,7 +55,7 @@ export default {
   },
   data() {
     return {
-      // movieId: this.$route.params.movieId,
+      max: 10,
     };
   },
   computed: {
@@ -44,37 +65,34 @@ export default {
     movieId() {
       return this.$route.params.movieid;
     },
+    value() {
+      return this.$store.state.movieData.vote_average;
+    },
   },
   created() {
     this.getDetail();
-    // this.movieId = this.$route.params.movieid;
-    // this.getMovieDetail();
   },
   methods: {
     getDetail() {
       this.$store.dispatch("getDetail", this.movieId);
     },
-    // getMovieDetail() {
-    //   const options = {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       Authorization:
-    //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YzQyNzExMDBjM2FjZGYyOTAxYTkxMjhiYjY4NzMwNiIsInN1YiI6IjYzZDIwNWMwNjZhZTRkMDA4YzkyMjMwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YcFHsAOJFOrOfOc0gBh22Q8y2_PaJOT3LCnLb0yerjc",
-    //     },
-    //   };
-    //   axios
-    //     .get(
-    //       `https://api.themoviedb.org/3/movie/${this.movieId}?language=ko`,
-    //       options
-    //     )
-    //     .then((response) => {
-    //       this.movieData = response.data;
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // },
+    likeMovie() {
+      const options = {
+        method: "POST",
+        url: `${Server_URL}/main/${this.movieId}/like/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
+      };
+      axios
+        .request(options)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error.response.data);
+        });
+    },
     getPosterURL(posterPath) {
       return `https://image.tmdb.org/t/p/w500${posterPath}`;
     },
@@ -83,4 +101,10 @@ export default {
 </script>
 
 <style scoped>
+img {
+  width: 300px;
+}
+progress {
+  width: 80px;
+}
 </style>

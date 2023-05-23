@@ -5,13 +5,10 @@
 </template>
 
 <script>
-
-
 export default {
-  name: 'App',
-  components: {
-  }  
-}
+  name: "App",
+  components: {},
+};
 </script>
 
 <style>
@@ -28,5 +25,11 @@ export default {
   align-items: center;
   padding-top: 100px;
   padding-bottom: 100px;
+  font-family: "GowunDodum";
+}
+@font-face {
+  font-family: "GowunDodum";
+  src: url("assets/fonts/GowunDodum-Regular.ttf") format("truetype");
+  font-weight: 300;
 }
 </style>

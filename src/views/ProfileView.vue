@@ -1,22 +1,51 @@
 <template>
   <div>
     <NavBar />
-    <h1>{{ userName }} 님의 프로필</h1>
-    <img
-      :src="profileImageURL"
-      alt=""
-      v-if="userProfileData.profileimage"
-    />
-    <img src="..\src\assets\default.jpg" alt="" v-else />
-    <form @submit.prevent="updateImage">
-      <input
-        type="file"
-        id="profileimage"
-        accept="image/*"
-        @change="imgChange"
-      />
-      <button>Update</button>
-    </form>
+    <vs-row
+      class="mh"
+      align="center"
+      justify="space-between"
+      direction="column"
+    >
+      <vs-col w="12">
+        <h1>{{ userName }} 님의 프로필</h1>
+      </vs-col>
+      <vs-col w="12">
+        <img
+          :src="profileImageURL"
+          alt=""
+          v-if="userProfileData.profileimage"
+        />
+        <img src="..\src\assets\default.jpg" alt="" v-else />
+      </vs-col>
+
+      <vs-col :offset="2" w="1">
+        <vs-button success border @click="active = !active"> Change </vs-button>
+      </vs-col>
+
+      <vs-dialog width="300px" center v-model="active">
+        <div class="con-content">
+          <form @submit.prevent="updateImage" class="center">
+            <vs-input
+              success
+              border
+              type="file"
+              id="profileimage"
+              accept="image/*"
+              @change="imgChange"
+            />
+            <vs-button success>Update</vs-button>
+          </form>
+        </div>
+        <template #footer>
+          <div class="con-footer">
+            <vs-button @click="active = false" dark transparent>
+              Cancel
+            </vs-button>
+          </div>
+        </template>
+      </vs-dialog>
+    </vs-row>
   </div>
 </template>
 
@@ -34,6 +63,7 @@ export default {
   data() {
     return {
       profileImage: "",
+      active: false,
     };
   },
   computed: {
@@ -44,8 +74,8 @@ export default {
       return this.$store.state.profileData;
     },
     profileImageURL() {
-      return `${Server_URL}${this.$store.state.profileData.profileimage}`
-    } 
+      return `${Server_URL}${this.$store.state.profileData.profileimage}`;
+    },
   },
   methods: {
     imgChange(event) {
@@ -75,7 +105,7 @@ export default {
         });
     },
     // getProfileImg() {
-      //   return this.profileImageURL;
+    //   return this.profileImageURL;
     // },
   },
   created() {
@@ -87,5 +117,11 @@ export default {
 <style scoped>
 #profileimage {
   width: 250px;
+}
+.center {
+  display: flex;
+}
+img {
+  width: 200px;
 }
 </style>

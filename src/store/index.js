@@ -59,24 +59,24 @@ export default new Vuex.Store({
           userid, username, password1, password2,
         }
       }).then(result => {
-        context.commit('LOG_IN', { token: result.data.key, username: username })
-        router.push('/')
+        context.commit('LOG_IN', { token: result.data.key, username: userid })
+        router.push('/select')
       }).catch(error => {
         console.log(error.response.data)
       })
     },
     logIn(context, payload) {
-      const username = payload.username
+      const userid = payload.userid
       const password = payload.password
 
       axios({
         method: 'post',
         url: `${Server_URL}/accounts/login/`,
         data: {
-          username, password
+          userid, password
         }
       }).then(result => {
-        context.commit('LOG_IN', { token: result.data.key, username: username })
+        context.commit('LOG_IN', { token: result.data.key, username: userid })
         router.push('/')
         router.go(0)
       }).catch(error => {
@@ -99,7 +99,11 @@ export default new Vuex.Store({
     getDetail(context, movieId) {
       axios({
         method: 'get',
-        url: `${Server_URL}/main/${movieId}/`
+        url: `https://api.themoviedb.org/3/movie/${movieId}?language=ko`,
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YzQyNzExMDBjM2FjZGYyOTAxYTkxMjhiYjY4NzMwNiIsInN1YiI6IjYzZDIwNWMwNjZhZTRkMDA4YzkyMjMwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YcFHsAOJFOrOfOc0gBh22Q8y2_PaJOT3LCnLb0yerjc'
+        }
       }).then(response => {
         context.commit('GET_DETAIL', response.data)
       }).catch(error => {

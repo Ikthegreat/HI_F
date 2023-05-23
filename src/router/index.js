@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import StartView from '@/views/StartView'
 import MainView from '@/views/MainView'
 import SignUpView from '@/views/SignUpView'
+import SelectView from '@/views/SelectView'
 import LogInView from '@/views/LogInView'
 import LogOutView from '@/views/LogOutView'
 import ProfileView from '@/views/ProfileView'
@@ -35,6 +36,12 @@ const routes = [
     name: 'signup',
     component: SignUpView,
     meta: { requiresAuth: false },
+  },
+  {
+    path: '/select',
+    name: 'select',
+    component: SelectView,
+    meta: { requiresAuth: true },
   },
   {
     path: '/profile',
