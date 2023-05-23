@@ -88,4 +88,10 @@ a {
 i {
   color: #46c93a;
 }
+#container {
+  background-color: white;
+  padding: 20px;
+  padding-left: 10px;
+  border-radius: 5%;
+}
 </style>

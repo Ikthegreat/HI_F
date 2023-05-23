@@ -26,7 +26,12 @@ export default {
   padding-top: 100px;
   padding-bottom: 100px;
   font-family: "GowunDodum";
+
+  background-image: url(./assets/Navbar.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 @font-face {
   font-family: "GowunDodum";
   src: url("assets/fonts/GowunDodum-Regular.ttf") format("truetype");

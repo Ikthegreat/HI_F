@@ -28,7 +28,18 @@
       </b-row>
     </b-container>
 
-    <vs-button @click="likeMovie"> Like </vs-button>
+    <div class="pl-5 ml-5 mt-3">
+      <div v-if="isLiked">
+        <vs-button success @click="likeMovie">
+          <i class="bx bxs-heart"></i>
+        </vs-button>
+      </div>
+      <div v-else>
+        <vs-button success @click="likeMovie">
+          <i class="bx bx-heart"></i>
+        </vs-button>
+      </div>
+    </div>
 
     <!-- <div class="center con-avatars">
       <vs-avatar-group max="3">
@@ -56,6 +67,7 @@ export default {
   data() {
     return {
       max: 10,
+      isLiked: false,
     };
   },
   computed: {
@@ -87,7 +99,7 @@ export default {
       axios
         .request(options)
         .then((response) => {
-          console.log(response.data);
+          this.isLiked = response.data.is_liked;
         })
         .catch((error) => {
           console.error(error.response.data);
@@ -106,5 +118,8 @@ img {
 }
 progress {
   width: 80px;
+}
+i {
+  font-size: 25px;
 }
 </style>
