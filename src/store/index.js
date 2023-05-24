@@ -97,11 +97,12 @@ export default new Vuex.Store({
       context.commit("LOG_OUT");
     },
     getMain(context) {
+      console.log(this.state.token)
       axios({
         method: "get",
         url: `${Server_URL}/main/`,
         headers: {
-          Authorization: `Token ${this.$store.state.token}`,
+          Authorization: `Token ${this.state.token}`,
         },
       })
         .then((response) => {
