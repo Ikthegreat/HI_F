@@ -23,7 +23,7 @@
             dark
             id="username"
             v-model="username"
-            placeholder="Username"
+            placeholder="Username (required)"
           >
             <template #icon>
               <i class="bx bx-user"></i>
@@ -34,7 +34,7 @@
             dark
             type="password"
             v-model="password1"
-            placeholder="Password"
+            placeholder="Password (required)"
           >
             <template #icon>
               <i class="bx bx-lock-alt"></i>
@@ -45,7 +45,7 @@
             dark
             type="password"
             v-model="password2"
-            placeholder="Password Confirmation"
+            placeholder="Password Confirmation (required)"
           >
             <template #icon>
               <i class="bx bx-check"></i>
