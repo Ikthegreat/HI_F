@@ -2,23 +2,41 @@
   <div id="select" v-if="selectedMovies.length < 3">
     <h3>본인 취향에 가까운 영화를 3가지 골라주세요</h3>
     <div>
-      <div id="card" v-for="movie in movieList" :key="movie.id">
-        <img
-          @click="movieSelect(movie.id)"
-          :src="getPosterURL(movie.poster_path)"
-          alt=""
-          :class="{ selected: isMovieSelected(movie.id) }"
-        />
-      </div>
+      <table>
+        <tr
+          v-for="(item, index) in Math.ceil(movieList.length / 4)"
+          :key="index"
+        >
+          <td v-for="j in 4" :key="j">
+            <div v-if="movieList[index * 4 + (j - 1)]" id="card">
+              <img
+                @click="movieSelect(movieList[index * 4 + (j - 1)].id)"
+                :src="getPosterURL(movieList[index * 4 + (j - 1)].poster_path)"
+                alt=""
+                :class="{
+                  selected: isMovieSelected(movieList[index * 4 + (j - 1)].id),
+                }"
+              />
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  <div v-else style="display: flex">
-    <vs-row :w="12">
-      <vs-col :w="2" :offset="5">
-        <vs-button success @click="selectComplete">제출하기</vs-button>
-        <vs-button border success @click="goBack">뒤로가기</vs-button>
-      </vs-col>
-    </vs-row>
+  <div
+    v-else
+    style="
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.5);
+      width: 280px;
+      height: 150px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10%;
+    "
+  >
+    <vs-button id="button" success @click="selectComplete">제출하기</vs-button>
+    <vs-button id="button" success @click="goBack">뒤로가기</vs-button>
   </div>
 </template>
 
@@ -45,9 +63,7 @@ export default {
         url: `${Server_URL}/select/`,
       })
         .then((response) => {
-          for (let i = 0; i < response.data.length; i++) {
-            this.movieList.push(response.data[i]);
-          }
+          this.movieList = response.data;
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -100,16 +116,29 @@ export default {
 </script>
 
 <style scoped>
+#select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 3%;
+}
 h3 {
   color: #46c93a;
 }
 img {
-  width: 150px;
-  height: 220px;
+  width: 120px;
+  height: 160px;
 }
 .selected {
   border-style: dashed;
   border-width: 3px;
   border-color: #46c93a;
+}
+#button {
+  width: 100px;
+  height: 60px;
 }
 </style>

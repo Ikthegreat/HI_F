@@ -6,7 +6,7 @@
       </template>
       <form @submit.prevent="signUp">
         <div class="con-form">
-          <vs-input
+          <!-- <vs-input
             border
             success
             id="userid"
@@ -16,7 +16,7 @@
             <template #icon>
               <i class="bx bxs-id-card"></i>
             </template>
-          </vs-input>
+          </vs-input> -->
 
           <vs-input
             border
@@ -68,7 +68,7 @@ export default {
   name: "SignUpView",
   data() {
     return {
-      userid: "",
+      // userid: "",
       username: "",
       password1: "",
       password2: "",
@@ -76,13 +76,13 @@ export default {
   },
   methods: {
     signUp() {
-      const userid = this.userid;
+      // const userid = this.userid;
       const username = this.username;
       const password1 = this.password1;
       const password2 = this.password2;
 
       const payload = {
-        userid,
+        // userid,
         username,
         password1,
         password2,

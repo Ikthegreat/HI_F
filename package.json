@@ -18,6 +18,7 @@
     "vue-cookies": "^1.8.3",
     "vue-navigation-bar": "^4.1.0",
     "vue-router": "^3.5.1",
+    "vue-sweetalert2": "^5.0.5",
     "vuesax": "^4.0.1-alpha.25",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"

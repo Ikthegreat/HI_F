@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="movieList">
     <h3>{{ movieListTag }}</h3>
     <div class="movie-list">
       <MovieListItem
@@ -45,6 +45,12 @@ h3 {
   margin-bottom: 10px;
   text-align: start;
   font-weight: bold;
-  color: white;
+  color: black;
+}
+#movieList {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 3%;
 }
 </style>

@@ -3,13 +3,19 @@ import Vuex from "vuex";
 import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
 import router from "@/router";
+import Swal from "sweetalert2"
 
 const Server_URL = "http://127.0.0.1:8000";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      key: 'vuexStore',
+      storage: window.sessionStorage,
+    }),
+  ],
   state: {
     token: null,
     movies: [],
@@ -43,7 +49,7 @@ export default new Vuex.Store({
   },
   actions: {
     signUp(context, payload) {
-      const userid = payload.userid;
+      // const userid = payload.userid;
       const username = payload.username;
       const password1 = payload.password1;
       const password2 = payload.password2;
@@ -53,7 +59,7 @@ export default new Vuex.Store({
         method: "post",
         url: `${Server_URL}/accounts/signup/`,
         data: {
-          userid,
+          // userid,
           username,
           password1,
           password2,
@@ -62,16 +68,41 @@ export default new Vuex.Store({
         .then((result) => {
           context.commit("LOG_IN", {
             token: result.data.key,
-            username: userid,
+            username: username,
           });
           router.push("/select");
         })
         .catch((error) => {
-          console.log(error.response.data);
+          console.log(error.response.data)
+          if (error.response.data.username) {
+            Swal.fire({
+              title: '회원가입 오류',
+              text: '아이디를 확인해주세요.',
+              icon: 'error',
+              confirmButtonColor: '#46c93a',
+            });
+          }
+          if (error.response.data.password1) {
+            const passwordConditions = "<div style='text-align: left;'>비밀번호 조건<br><br>- Username과 유사하지 않아야 합니다.<br>- 최소 8자 이상이어야 합니다.<br>- 비밀번호는 Common 하지 않아야 합니다.<br>- 전부 숫자로 된 비밀번호는 사용할 수 없습니다.</div>";
+            Swal.fire({
+              title: '회원가입 오류',
+              html: passwordConditions,
+              icon: 'error',
+              confirmButtonColor: '#46c93a',
+            });
+          }
+          if (error.response.data.non_field_errors) {
+            Swal.fire({
+              title: '회원가입 오류',
+              text: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+              icon: 'error',
+              confirmButtonColor: '#46c93a',
+            });
+          }
         });
     },
     logIn(context, payload) {
-      const username = payload.userid;
+      const username = payload.username;
       const password = payload.password;
       axios({
         method: "POST",
@@ -89,8 +120,13 @@ export default new Vuex.Store({
           router.push("/");
           router.go(0);
         })
-        .catch((error) => {
-          console.log(error.response.data);
+        .catch(() => {
+          Swal.fire({
+            title: '로그인 오류',
+            text: '로그인 정보를 확인해주세요.',
+            icon: 'error',
+            confirmButtonColor: '#46c93a',
+          });
         });
     },
     logOut(context) {

@@ -59,7 +59,7 @@ export default {
   text-decoration: none;
 }
 #logOutBtn {
-  color: #46c93a;
+  color: #ffba00;
   background-color: white;
 }
 #navbar {

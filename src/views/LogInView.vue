@@ -9,9 +9,9 @@
           <vs-input
             border
             success
-            id="userid"
-            v-model="userid"
-            placeholder="ID"
+            id="username"
+            v-model="username"
+            placeholder="Username"
           >
             <template #icon>
               <i class="bx bx-user"></i>
@@ -57,7 +57,7 @@ export default {
   name: "LogInView",
   data() {
     return {
-      userid: "",
+      username: "",
       password: "",
       remember: false,
     };
@@ -65,32 +65,32 @@ export default {
   methods: {
     logIn() {
       if (this.remember) {
-        this.$cookies.set("idCookie", this.userid);
+        this.$cookies.set("idCookie", this.username);
       } else {
         this.$cookies.remove("idCookie");
       }
 
-      const userid = this.userid;
+      const username = this.username;
       const password = this.password;
 
       const payload = {
-        userid,
+        username,
         password,
       };
       this.$store.dispatch("logIn", payload);
     },
-    getUserId() {
-      this.userid = this.$cookies.get("idCookie");
+    getUsername() {
+      this.username = this.$cookies.get("idCookie");
     },
     getRememberState() {
       // const rememberState = document.getElementById("rememberBox");
-      if (this.userid) {
+      if (this.username) {
         this.remember = true;
       }
     },
   },
   created() {
-    this.getUserId();
+    this.getUsername();
     this.getRememberState();
   },
 };

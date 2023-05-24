@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import Vuesax from 'vuesax'
+import VueSweetalert2 from 'vue-sweetalert2'
 
 import 'vuesax/dist/vuesax.css'
 import 'boxicons/css/boxicons.min.css'
@@ -17,6 +18,8 @@ import vueCookies from "vue-cookies"
 Vue.use(BootstrapVue)
 
 Vue.use(vueCookies)
+
+Vue.use(VueSweetalert2)
 
 Vue.$cookies.config("3d")
 
