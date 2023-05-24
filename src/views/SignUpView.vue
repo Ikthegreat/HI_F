@@ -8,7 +8,7 @@
         <div class="con-form">
           <!-- <vs-input
             border
-            success
+            dark
             id="userid"
             v-model="userid"
             placeholder="ID"
@@ -20,7 +20,7 @@
 
           <vs-input
             border
-            success
+            dark
             id="username"
             v-model="username"
             placeholder="Username"
@@ -31,7 +31,7 @@
           </vs-input>
           <vs-input
             border
-            success
+            dark
             type="password"
             v-model="password1"
             placeholder="Password"
@@ -42,7 +42,7 @@
           </vs-input>
           <vs-input
             border
-            success
+            dark
             type="password"
             v-model="password2"
             placeholder="Password Confirmation"
@@ -55,7 +55,9 @@
 
         <template footer>
           <div class="footer-dialog mt-4">
-            <vs-button success type="submit" block> Sign In </vs-button>
+            <vs-button id="submit" dark type="submit" block>
+              Sign In
+            </vs-button>
           </div>
         </template>
       </form>
@@ -95,20 +97,27 @@ export default {
 
 <style scoped>
 h4 {
-  color: #46c93a;
+  font-family: "MonomaniacOne-Regular";
+  /* color: white; */
+  color: rgba(36, 33, 69);
 }
 a {
   text-decoration: none;
-  color: #46c93a;
+  color: rgba(36, 33, 69);
 }
 i {
-  color: #46c93a;
+  color: rgba(36, 33, 69);
 }
 #container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
   width: 300px;
   padding: 20px;
   padding-left: 10px;
   border-radius: 5%;
+}
+@font-face {
+  font-family: "MonomaniacOne-Regular";
+  src: url("../assets/fonts/MonomaniacOne-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 </style>

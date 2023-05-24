@@ -2,7 +2,6 @@
   <div class="center examplex">
     <vs-navbar
       id="navbar"
-      padding-scroll
       square
       text-white
       :color="active"
@@ -11,13 +10,13 @@
       v-model="active"
     >
       <template #left>
-        <vs-button icon id="toMain" @click="ifNowMain" success>
-          <i class="bx bx-home-alt-2"> Main</i>
+        <vs-button icon id="toMain" @click="ifNowMain" dark>
+          <i class="bx bx-home-alt-2"></i>
         </vs-button>
       </template>
       <template #right>
         <router-link :to="{ name: 'profile' }" class="no-underline">
-          <vs-button success>
+          <vs-button dark>
             <i class="bx bx-user"> Profile</i>
           </vs-button>
         </router-link>
@@ -59,14 +58,15 @@ export default {
   text-decoration: none;
 }
 #logOutBtn {
-  color: #46c93a;
-  background-color: white;
+  color: rgba(36, 33, 69);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 #navbar {
-  background-image: url(../assets/BackGround_Select.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* background-image: url(../assets/BackGround_Select.jpg); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* background-position: center; */
   /* background-color: black; */
 }
 </style>

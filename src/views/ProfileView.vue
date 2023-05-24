@@ -7,9 +7,7 @@
       <img :src="profileImageURL" alt="" v-if="userProfileData.profileimage" />
       <img src="..\src\assets\default.jpg" alt="" v-else />
       <div id="changeImage">
-        <vs-button success border @click="active = !active">
-          Change image
-        </vs-button>
+        <vs-button dark @click="active = !active"> Change image </vs-button>
       </div>
     </div>
 
@@ -17,14 +15,14 @@
       <div class="con-content">
         <form @submit.prevent="updateImage" class="center">
           <vs-input
-            success
+            dark
             border
             type="file"
             id="profileimage"
             accept="image/*"
             @change="imgChange"
           />
-          <vs-button success>Update</vs-button>
+          <vs-button dark>Update</vs-button>
         </form>
       </div>
       <template #footer>
@@ -105,7 +103,7 @@ export default {
 
 <style scoped>
 #profile {
-  background-color: white;
+  /* background-color: white; */
   padding: 30px;
   border-radius: 3%;
   display: flex;

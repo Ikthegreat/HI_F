@@ -1,14 +1,16 @@
 <template>
   <div class="container">
     <div class="start">
-      <h1>Welcome</h1>
+      <h1>Shack</h1>
       <div class="grid">
         <vs-row justify="center">
-          <router-link id="toLogin" :to="{ name: 'login' }">
-            <vs-button success size="xl" flat>Log In</vs-button>
+          <router-link id="button" :to="{ name: 'login' }">
+            <vs-button id="button" dark border transparent>Log In</vs-button>
           </router-link>
-          <router-link id="toSignUp" :to="{ name: 'signup' }">
-            <vs-button success size="xl">Get Started</vs-button>
+          <router-link id="button" :to="{ name: 'signup' }">
+            <vs-button id="button" dark border transparent
+              >Get Started</vs-button
+            >
           </router-link>
         </vs-row>
       </div>
@@ -21,19 +23,27 @@ export default {};
 </script>
 
 <style scoped>
-#toLogin {
+#button {
   text-decoration: none;
+  color: white;
+  font-weight: 800;
 }
 h1 {
-  color: #46c93a;
+  font-family: "MonomaniacOne-Regular";
+  color: white;
 }
 .container {
-  width: 30%;
-  height: 30%;
-  background-color: rgba(255, 255, 255);
+  width: 250px;
+  height: 250px;
+  background-color: rgba(255, 255, 255, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5%;
+}
+@font-face {
+  font-family: "MonomaniacOne-Regular";
+  src: url("../assets/fonts/MonomaniacOne-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 </style>

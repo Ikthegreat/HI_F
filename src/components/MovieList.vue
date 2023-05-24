@@ -1,6 +1,8 @@
 <template>
   <div id="movieList">
-    <h3>{{ movieListTag }}</h3>
+    <div>
+      <h3>{{ this.$store.state.loginUser }}{{ movieListTag }}</h3>
+    </div>
     <div class="movie-list">
       <MovieListItem
         v-for="(movie, index) in movies"
@@ -44,13 +46,12 @@ h3 {
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: start;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: black;
 }
 #movieList {
   background-color: white;
-  padding: 25px;
-  margin-bottom: 20px;
-  border-radius: 3%;
+  padding: 10px;
+  margin-bottom: 50px;
 }
 </style>

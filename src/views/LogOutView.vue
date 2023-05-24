@@ -1,6 +1,6 @@
 <template>
   <div class="logout">
-    <h1>이용해주셔서 감사합니다.</h1>
+    <!-- <h1>이용해주셔서 감사합니다.</h1> -->
     <router-link id="link" :to="{ name: 'start' }">처음 화면으로</router-link>
   </div>
 </template>
@@ -9,7 +9,9 @@
 export default {
   name: "LogOutView",
   created() {
-    this.$store.dispatch("logOut");
+    this.$store.dispatch("logOut").then(() => {
+      this.$router.push("/start");
+    });
   },
 };
 </script>

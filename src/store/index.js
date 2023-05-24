@@ -145,7 +145,7 @@ export default new Vuex.Store({
           context.commit("GET_MAIN", response.data);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data);
         });
     },
     getDetail(context, movieId) {

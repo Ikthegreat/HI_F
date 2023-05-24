@@ -1,13 +1,13 @@
 <template>
   <div>
     <NavBar />
-    <b-container>
+    <b-container id="container">
       <b-row id="movieinfo">
-        <b-col>
+        <b-col :w="6">
           <img :src="getPosterURL(movieData.poster_path)" alt="" />
         </b-col>
-        <b-col>
-          <h3 id="title" class="mt-5 mb-3">
+        <b-col id="content">
+          <h3 id="title" class="mb-3">
             {{ movieData.title }}
           </h3>
           <h5 v-if="movieData.released_date">
@@ -24,18 +24,13 @@
           </div>
           <h6 v-if="movieData.overview">{{ movieData.overview }}</h6>
           <h6 v-else>등록된 줄거리가 없습니다</h6>
-          <div>
-            <div v-if="isLiked">
-              <vs-button success @click="likeMovie">
-                <i class="bx bxs-heart"></i>
-              </vs-button>
-            </div>
-            <div v-else>
-              <vs-button success @click="likeMovie">
-                <i class="bx bx-heart"></i>
-              </vs-button>
-            </div>
-          </div>
+
+          <vs-button danger @click="likeMovie">
+            <i
+              class="bx"
+              :class="{ 'bxs-heart': isLiked, 'bx-heart': !isLiked }"
+            ></i>
+          </vs-button>
         </b-col>
       </b-row>
     </b-container>
@@ -113,7 +108,8 @@ export default {
 
 <style scoped>
 img {
-  width: 300px;
+  max-width: 100%;
+  max-height: 100%;
 }
 progress {
   width: 80px;
@@ -124,13 +120,18 @@ i {
 #movieinfo {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: white;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 3%;
+  height: 100%;
+  max-height: 800px;
 }
 #title {
   position: relative;
+}
+#content {
+  height: 100%;
 }
 </style>

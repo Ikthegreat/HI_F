@@ -8,7 +8,7 @@
         <div class="con-form">
           <vs-input
             border
-            success
+            dark
             id="username"
             v-model="username"
             placeholder="Username"
@@ -19,7 +19,7 @@
           </vs-input>
           <vs-input
             border
-            success
+            dark
             type="password"
             v-model="password"
             placeholder="Password"
@@ -29,7 +29,7 @@
             </template>
           </vs-input>
           <div class="flex">
-            <vs-checkbox id="rememberBox" success v-model="remember"
+            <vs-checkbox id="rememberBox" dark v-model="remember"
               >Remember me</vs-checkbox
             >
           </div>
@@ -37,7 +37,7 @@
 
         <template footer>
           <div class="footer-dialog">
-            <vs-button success type="submit" block> Log In </vs-button>
+            <vs-button dark type="submit" block> Log In </vs-button>
 
             <div class="new">
               New Here?
@@ -98,19 +98,26 @@ export default {
 
 <style scoped>
 h4 {
-  color: #46c93a;
+  font-family: "MonomaniacOne-Regular";
+  /* color: white; */
+  color: rgba(36, 33, 69);
 }
 #goSubmit {
-  color: #46c93a;
+  color: rgba(36, 33, 69);
 }
 i {
-  color: #46c93a;
+  color: rgba(36, 33, 69);
 }
 #container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
   width: 300px;
   padding: 20px;
   padding-left: 10px;
   border-radius: 5%;
+}
+@font-face {
+  font-family: "MonomaniacOne-Regular";
+  src: url("../assets/fonts/MonomaniacOne-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 </style>

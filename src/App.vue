@@ -32,25 +32,29 @@ export default {
 #app {
   text-align: center;
   height: 937px;
-
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "GowunDodum";
+  color: white;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-image: url(./assets/Black.jpg);
 }
-.isSelectPage {
+
+/* .isSelectPage {
   background-image: url(./assets/BackGround_Select.jpg);
 }
 .isLogined {
-  background-image: url(./assets/BackGround_isLogined.jpg);
+  background-color: white;
   padding-top: 100px;
 }
 .isnotLogined {
-  background-image: url(./assets/BackGround.jpg);
-}
+  background-image: url(./assets/pexels-jakub-novacek-924824.jpg);
+  background-color: black;
+} */
 
 @font-face {
   font-family: "GowunDodum";
