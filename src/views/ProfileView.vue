@@ -1,22 +1,17 @@
 <template>
   <div>
     <NavBar />
-    <b-row>
-      <b-col id="profile">
-        <h1>{{ userName }} 님의 프로필</h1>
+    <div id="profile">
+      <h1>{{ userName }} 님의 프로필</h1>
 
-        <img
-          :src="profileImageURL"
-          alt=""
-          v-if="userProfileData.profileimage"
-        />
-        <img src="..\src\assets\default.jpg" alt="" v-else />
-
+      <img :src="profileImageURL" alt="" v-if="userProfileData.profileimage" />
+      <img src="..\src\assets\default.jpg" alt="" v-else />
+      <div id="changeImage">
         <vs-button success border @click="active = !active">
           Change image
         </vs-button>
-      </b-col>
-    </b-row>
+      </div>
+    </div>
 
     <vs-dialog width="300px" center v-model="active">
       <div class="con-content">
@@ -109,6 +104,16 @@ export default {
 </script>
 
 <style scoped>
+#profile {
+  background-color: white;
+  padding: 30px;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #profileimage {
   width: 250px;
 }
@@ -118,7 +123,10 @@ export default {
 img {
   width: 200px;
 }
-h1 {
-  color: white;
+#changeImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

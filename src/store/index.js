@@ -81,9 +81,9 @@ export default new Vuex.Store({
           password,
         },
       })
-        .then((result) => {
+        .then((response) => {
           context.commit("LOG_IN", {
-            token: result.data.key,
+            token: response.data.key,
             username: username,
           });
           router.push("/");
@@ -99,10 +99,7 @@ export default new Vuex.Store({
     getMain(context) {
       axios({
         method: "get",
-        url: `${Server_URL}/main/`,
-        headers: {
-          Authorization: `Token ${this.$store.state.token}`,
-        },
+        url: `${Server_URL}/main/?username=${this.loginUser}`,
       })
         .then((response) => {
           context.commit("GET_MAIN", response.data);
