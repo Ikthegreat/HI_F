@@ -12,7 +12,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import BootstrapVue from 'bootstrap-vue'
 
+import vueCookies from "vue-cookies"
+
 Vue.use(BootstrapVue)
+
+Vue.use(vueCookies)
+
+Vue.$cookies.config("3d")
 
 Vue.use(Vuesax, {
   icons: {

@@ -74,6 +74,9 @@ export default {
         data: {
           movie_id: this.selectedMovies,
         },
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
       })
         .then(() => {
           this.$router.push("/");

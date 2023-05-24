@@ -29,7 +29,9 @@
             </template>
           </vs-input>
           <div class="flex">
-            <vs-checkbox success v-model="remember">Remember me</vs-checkbox>
+            <vs-checkbox id="rememberBox" success v-model="remember"
+              >Remember me</vs-checkbox
+            >
           </div>
         </div>
 
@@ -55,13 +57,19 @@ export default {
   name: "LogInView",
   data() {
     return {
-      userid: "",
+      userid: this.$cookies.get("idCookie"),
       password: "",
-      remember: "",
+      remember: false,
     };
   },
   methods: {
     logIn() {
+      if (this.remember) {
+        this.$cookies.set("idCookie", this.userid);
+      } else {
+        this.$cookie.delete("idCookie");
+      }
+
       const userid = this.userid;
       const password = this.password;
 
@@ -70,6 +78,14 @@ export default {
         password,
       };
       this.$store.dispatch("logIn", payload);
+    },
+  },
+  created: {
+    getRememberState() {
+      const rememberState = document.getElementById("rememberBox");
+      if (this.userid) {
+        rememberState.setAttribute("checked", true);
+      }
     },
   },
 };
