@@ -2,7 +2,7 @@
   <div>
     <div id="container">
       <template header>
-        <h4 class="mb-3">Hello!</h4>
+        <h4 class="mb-3">Nice to meet You!</h4>
       </template>
       <form @submit.prevent="logIn">
         <div class="con-form">
@@ -41,7 +41,7 @@
 
             <div class="new">
               New Here?
-              <router-link :to="{ name: 'signup' }"
+              <router-link id="goSubmit" :to="{ name: 'signup' }"
                 >Create New Account</router-link
               >
             </div>
@@ -57,7 +57,7 @@ export default {
   name: "LogInView",
   data() {
     return {
-      userid: this.$cookies.get("idCookie"),
+      userid: "",
       password: "",
       remember: false,
     };
@@ -67,7 +67,7 @@ export default {
       if (this.remember) {
         this.$cookies.set("idCookie", this.userid);
       } else {
-        this.$cookie.delete("idCookie");
+        this.$cookies.remove("idCookie");
       }
 
       const userid = this.userid;
@@ -79,14 +79,19 @@ export default {
       };
       this.$store.dispatch("logIn", payload);
     },
-  },
-  created: {
+    getUserId() {
+      this.userid = this.$cookies.get("idCookie");
+    },
     getRememberState() {
-      const rememberState = document.getElementById("rememberBox");
+      // const rememberState = document.getElementById("rememberBox");
       if (this.userid) {
-        rememberState.setAttribute("checked", true);
+        this.remember = true;
       }
     },
+  },
+  created() {
+    this.getUserId();
+    this.getRememberState();
   },
 };
 </script>
@@ -95,8 +100,7 @@ export default {
 h4 {
   color: #46c93a;
 }
-a {
-  text-decoration: none;
+#goSubmit {
   color: #46c93a;
 }
 i {

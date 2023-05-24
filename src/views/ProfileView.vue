@@ -12,7 +12,9 @@
         />
         <img src="..\src\assets\default.jpg" alt="" v-else />
 
-        <vs-button success border @click="active = !active"> Change </vs-button>
+        <vs-button success border @click="active = !active">
+          Change image
+        </vs-button>
       </b-col>
     </b-row>
 
@@ -115,5 +117,8 @@ export default {
 }
 img {
   width: 200px;
+}
+h1 {
+  color: white;
 }
 </style>

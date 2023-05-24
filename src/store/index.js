@@ -100,6 +100,9 @@ export default new Vuex.Store({
       axios({
         method: "get",
         url: `${Server_URL}/main/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
       })
         .then((response) => {
           context.commit("GET_MAIN", response.data);

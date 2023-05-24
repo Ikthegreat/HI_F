@@ -2,7 +2,7 @@
   <div>
     <div id="container">
       <template header>
-        <h4 class="mb-3">Welcome to <b>sMovieR</b></h4>
+        <h4 class="mb-3">Welcome to <b>Shack</b></h4>
       </template>
       <form @submit.prevent="signUp">
         <div class="con-form">
@@ -54,7 +54,7 @@
         </div>
 
         <template footer>
-          <div class="footer-dialog">
+          <div class="footer-dialog mt-4">
             <vs-button success type="submit" block> Sign In </vs-button>
           </div>
         </template>
