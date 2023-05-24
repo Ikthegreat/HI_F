@@ -51,6 +51,30 @@
               <i class="bx bx-check"></i>
             </template>
           </vs-input>
+
+          <vs-input
+            border
+            dark
+            type="text"
+            v-model="phonenumber"
+            placeholder="Phone Number (ex.01012345678)"
+          >
+            <template #icon>
+              <i class="bx bx-phone"></i>
+            </template>
+          </vs-input>
+
+          <vs-input
+            border
+            dark
+            type="email"
+            v-model="email"
+            placeholder="E-mail (ex.sample@shack.com)"
+          >
+            <template #icon>
+              <i class="bx bx-envelope"></i>
+            </template>
+          </vs-input>
         </div>
 
         <template footer>
@@ -74,6 +98,8 @@ export default {
       username: "",
       password1: "",
       password2: "",
+      phonenumber: "",
+      email: "",
     };
   },
   methods: {
@@ -82,12 +108,16 @@ export default {
       const username = this.username;
       const password1 = this.password1;
       const password2 = this.password2;
+      const phonenumber = this.phonenumber;
+      const email = this.email;
 
       const payload = {
         // userid,
         username,
         password1,
         password2,
+        phonenumber,
+        email,
       };
       this.$store.dispatch("signUp", payload);
     },

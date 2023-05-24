@@ -121,7 +121,7 @@ i {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 3%;

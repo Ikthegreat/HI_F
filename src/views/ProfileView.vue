@@ -11,6 +11,27 @@
       </div>
     </div>
 
+    <div>
+      <!-- 이게 휴대폰 번호로 가져온 영화 제목 -->
+      <h6>{{ userName }}님의 휴대폰 번호를 기반으로 추천하는 영화 제목</h6>
+      <router-link
+        id="link"
+        :to="`/movie/${userPhonenumber}`"
+        :event="userPhonenumber ? 'click' : ''"
+        >{{ phoneMovie }}</router-link
+      >
+    </div>
+    <br />
+    <div>
+      <h6>{{ userName }}님의 이메일 주소를 기반으로 추천하는 영화 제목</h6>
+      <router-link
+        id="link"
+        :to="`/movie/${userEmail}`"
+        :event="userEmail ? 'click' : ''"
+        >{{ EmailMovie }}</router-link
+      >
+    </div>
+
     <vs-dialog width="300px" center v-model="active">
       <div class="con-content">
         <form @submit.prevent="updateImage" class="center">
@@ -51,6 +72,7 @@ export default {
     return {
       profileImage: "",
       active: false,
+      phonenumberMovie: "",
     };
   },
   computed: {
@@ -62,6 +84,26 @@ export default {
     },
     profileImageURL() {
       return `${Server_URL}${this.$store.state.profileData.profileimage}`;
+    },
+    userPhonenumber() {
+      return this.$store.state.phonenumber;
+    },
+    phoneMovie() {
+      if (this.$store.state.email) {
+        return this.$store.state.userPhonenumberMovieTitle;
+      } else {
+        return "정보가 없습니다.";
+      }
+    },
+    userEmail() {
+      return this.$store.state.email;
+    },
+    EmailMovie() {
+      if (this.$store.state.email) {
+        return this.$store.state.userEmailMovieTitle;
+      } else {
+        return "정보가 없습니다.";
+      }
     },
   },
   methods: {
@@ -91,12 +133,17 @@ export default {
           console.log(error);
         });
     },
-    // getProfileImg() {
-    //   return this.profileImageURL;
-    // },
+    getPhoneMovie() {
+      this.$store.dispatch("getPhoneMovie", this.userPhonenumber);
+    },
+    getEmailMovie() {
+      this.$store.dispatch("getEmailMovie", this.userEmail);
+    },
   },
   created() {
     this.getProfile();
+    this.getPhoneMovie();
+    this.getEmailMovie();
   },
 };
 </script>
@@ -126,5 +173,8 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+#link {
+  color: white;
 }
 </style>
