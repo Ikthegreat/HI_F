@@ -11,13 +11,13 @@
       v-model="active"
     >
       <template #left>
-        <vs-button icon id="toMain" @click="ifNowMain" warn>
+        <vs-button icon id="toMain" @click="ifNowMain" success>
           <i class="bx bx-home-alt-2"> Main</i>
         </vs-button>
       </template>
       <template #right>
         <router-link :to="{ name: 'profile' }" class="no-underline">
-          <vs-button warn>
+          <vs-button success>
             <i class="bx bx-user"> Profile</i>
           </vs-button>
         </router-link>
@@ -59,11 +59,11 @@ export default {
   text-decoration: none;
 }
 #logOutBtn {
-  color: #ffba00;
+  color: #46c93a;
   background-color: white;
 }
 #navbar {
-  background-image: url(../assets/Navbar.jpg);
+  background-image: url(../assets/BackGround_Select.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

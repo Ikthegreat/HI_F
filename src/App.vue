@@ -2,8 +2,9 @@
   <div
     id="app"
     :class="{
-      isLogined: isLogined,
+      isLogined: isLogined && !isSelectPage,
       isnotLogined: !isLogined,
+      isSelectPage: isSelectPage,
     }"
   >
     <router-view />
@@ -20,6 +21,9 @@ export default {
     isLogined() {
       return store.getters.isLogin;
     },
+    isSelectPage() {
+      return this.$route.path === "/select";
+    },
   },
 };
 </script>
@@ -32,12 +36,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-top: 100px;
-  padding-bottom: 100px; */
   font-family: "GowunDodum";
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.isSelectPage {
+  background-image: url(./assets/BackGround_Select.jpg);
 }
 .isLogined {
   background-image: url(./assets/BackGround_isLogined.jpg);
