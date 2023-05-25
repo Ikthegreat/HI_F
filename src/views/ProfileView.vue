@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div id="coverbox" style="height: 50%">
+        <div id="coverbox" style="height: 20%; padding: auto">
           <h6>{{ userName }}님의 이메일 주소를 기반으로 추천하는 영화 제목</h6>
           <div v-if="EmailMovie && userEmail">
             <router-link id="link" :to="`/movie/${userEmail}`">{{
@@ -53,7 +53,7 @@
           controls
           indicators
           background="#ababab"
-          style="text-shadow: 1px 1px 2px #333"
+          style="width: 200px"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >

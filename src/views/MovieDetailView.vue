@@ -3,18 +3,27 @@
     <NavBar />
     <div v-if="movieData">
       <b-container id="container">
-        <b-row id="movieinfo">
-          <b-col :w="6">
+        <div id="movieinfo">
+          <div id="image">
             <img :src="getPosterURL(movieData.poster_path)" alt="" />
-          </b-col>
-          <b-col id="content">
-            <h3 id="title" class="mb-3">
+          </div>
+          <div id="content">
+            <h3 id="title" class="mb-3" style="width: 100%">
               {{ movieData.title }}
             </h3>
-            <h5 v-if="movieData.released_date">
-              개봉일 : {{ movieData.released_date }}
+            <h6 style="width: 100%">{{ movieData.tagline }}</h6>
+            <div style="display: flex; justify-content: center; width: 100%">
+              <h5 v-for="text in movieData.genres" :key="text">
+                [{{ text.name }}]
+              </h5>
+            </div>
+            <h5
+              v-if="movieData.release_date"
+              style="width: 100%; align-self: start"
+            >
+              개봉일 : {{ movieData.release_date }}
             </h5>
-            <div v-if="movieData.vote_average">
+            <div v-if="movieData.vote_average" style="width: 100%">
               <b-progress :max="max" height="2rem" class="w-100 mb-2">
                 <b-progress-bar :value="value">
                   <span
@@ -23,7 +32,12 @@
                 </b-progress-bar>
               </b-progress>
             </div>
-            <h6 v-if="movieData.overview">{{ movieData.overview }}</h6>
+            <h6 style="align-self: start">
+              인기도 : {{ movieData.popularity }}
+            </h6>
+            <h6 v-if="movieData.overview">
+              {{ movieData.overview }}
+            </h6>
             <h6 v-else>등록된 줄거리가 없습니다</h6>
 
             <div class="mb-2" style="display: flex; justify-content: flex-end">
@@ -59,8 +73,8 @@
                 </div>
               </vs-avatar-group>
             </div>
-          </b-col>
-        </b-row>
+          </div>
+        </div>
       </b-container>
     </div>
   </div>
@@ -164,7 +178,7 @@ i {
 }
 #movieinfo {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
   background-color: rgba(255, 255, 255, 0.4);
   padding-top: 20px;
@@ -178,26 +192,13 @@ i {
 }
 #content {
   height: 100%;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+#image {
+  height: 100%;
+  width: 48%;
+  align-self: center;
 }
 </style>
-
-
-// 디테일 페이지를 들어가요
-// 우리 db를 건드는게 우선은 맞아요
-// 디테일 페이지에서 user 와의 reation이 존재하기 때문
-// - 우리 dgb에 있다? 문제 없음 
-//   like부분을 response에 담아서 줘야해요 (나의 좋아요 여부 + 영화를 좋아한 사람들 리스트)
-// - 우리 db에 없다?
-//   영화 뭉탱이를 ㅇ우리 db에 넣을떼 사용한 로직이 있잖아요
-//   그걸 tmdb에 요청을 한번 보내서 우리 db에 넣고
-
-
-// if 우리 디비에 없어:
-//   영화를 tmbd에서 우리 db로 저장 한 다음
-  
-// 영화 보여줘
-
-
-// 우리 디비에 없어요
-// 내가 좋아요를 눌렀을리가 없잖아요
-// IS LIKED가 FALSUE인 상태인거죠
