@@ -12,7 +12,14 @@
               {{ movieData.title }}
             </h3>
             <h6 style="width: 100%">{{ movieData.tagline }}</h6>
-            <div style="display: flex; justify-content: center; width: 100%">
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+              "
+            >
               <h5 v-for="text in movieData.genres" :key="text">
                 [{{ text.name }}]
               </h5>
@@ -39,39 +46,42 @@
               {{ movieData.overview }}
             </h6>
             <h6 v-else>등록된 줄거리가 없습니다</h6>
-
-            <div class="mb-2" style="display: flex; justify-content: flex-end">
-              <vs-button
-                style="width: 50px; height: 50px"
-                danger
-                @click="likeMovie"
-              >
-                <i
-                  class="bx"
-                  :class="{
-                    'bxs-heart': isLiked,
-                    'bx-heart': !isLiked,
-                  }"
-                ></i>
-              </vs-button>
-            </div>
-            <div
-              class="center con-avatars"
-              style="display: flex; justify-content: flex-end"
-            >
-              <vs-avatar-group max="3">
-                <div v-for="(likeUser, index) in likeUsers" :key="index">
-                  <vs-avatar>
-                    <img
-                      v-if="likeUsersProfile(index)"
-                      style="width: 100%; height: 100%"
-                      :src="profileImageURL(likeUsersProfile(index))"
-                      alt=""
-                    />
-                    <i v-else class="bx bx-user"></i>
-                  </vs-avatar>
+            <div id="like" style="position: sticky; bottom: 0">
+              <div class="">
+                <div style="display: flex; justify-content: flex-end">
+                  <vs-button
+                    style="width: 50px; height: 50px"
+                    danger
+                    @click="likeMovie"
+                  >
+                    <i
+                      class="bx"
+                      :class="{
+                        'bxs-heart': isLiked,
+                        'bx-heart': !isLiked,
+                      }"
+                    ></i>
+                  </vs-button>
                 </div>
-              </vs-avatar-group>
+                <div
+                  class="center con-avatars"
+                  style="display: flex; justify-content: flex-end"
+                >
+                  <vs-avatar-group max="3">
+                    <div v-for="(likeUser, index) in likeUsers" :key="index">
+                      <vs-avatar>
+                        <img
+                          v-if="likeUsersProfile(index)"
+                          style="width: 100%; height: 100%"
+                          :src="profileImageURL(likeUsersProfile(index))"
+                          alt=""
+                        />
+                        <i v-else class="bx bx-user"></i>
+                      </vs-avatar>
+                    </div>
+                  </vs-avatar-group>
+                </div>
+              </div>
             </div>
           </div>
         </div>
