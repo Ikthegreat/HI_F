@@ -245,7 +245,7 @@ export default new Vuex.Store({
       const options = {
         method: "GET",
         url: `https://api.themoviedb.org/3/movie/${num}`,
-        params: { language: "ko" },
+        params: { language: "ko-KR" },
         headers: {
           accept: "application/json",
           Authorization:
@@ -265,7 +265,7 @@ export default new Vuex.Store({
       const options = {
         method: "GET",
         url: `https://api.themoviedb.org/3/movie/${num}`,
-        params: { language: "ko" },
+        params: { language: "ko-KR" },
         headers: {
           accept: "application/json",
           Authorization:

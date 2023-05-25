@@ -26,30 +26,43 @@
             <h6 v-if="movieData.overview">{{ movieData.overview }}</h6>
             <h6 v-else>등록된 줄거리가 없습니다</h6>
 
-            <vs-button danger @click="likeMovie">
-              <i
-                class="bx"
-                :class="{
-                  'bxs-heart': isLiked,
-                  'bx-heart': !isLiked,
-                }"
-              ></i>
-            </vs-button>
+            <div class="mb-2" style="display: flex; justify-content: flex-end">
+              <vs-button
+                style="width: 50px; height: 50px"
+                danger
+                @click="likeMovie"
+              >
+                <i
+                  class="bx"
+                  :class="{
+                    'bxs-heart': isLiked,
+                    'bx-heart': !isLiked,
+                  }"
+                ></i>
+              </vs-button>
+            </div>
+            <div
+              class="center con-avatars"
+              style="display: flex; justify-content: flex-end"
+            >
+              <vs-avatar-group max="3">
+                <div v-for="(likeUser, index) in likeUsers" :key="index">
+                  <vs-avatar>
+                    <img
+                      v-if="likeUsersProfile(index)"
+                      style="width: 100%; height: 100%"
+                      :src="profileImageURL(likeUsersProfile(index))"
+                      alt=""
+                    />
+                    <i v-else class="bx bx-user"></i>
+                  </vs-avatar>
+                </div>
+              </vs-avatar-group>
+            </div>
           </b-col>
         </b-row>
       </b-container>
     </div>
-
-    <!-- <div class="center con-avatars">
-      <vs-avatar-group max="3">
-        <div v-for="index in likeUsers.length" :key="index">
-          <vs-avatar>
-            <img src="/avatars/avatar-1.png" alt="" />
-          </vs-avatar>
-          <h1>{{ likeUsersName }}</h1>
-        </div>
-      </vs-avatar-group>
-    </div> -->
   </div>
 </template>
 
@@ -79,10 +92,13 @@ export default {
     value() {
       return this.$store.state.movieData.vote_average;
     },
+    likeUsers() {
+      return this.$store.state.userWhoLikeThis;
+    },
     isLiked() {
       if (
-        Object.keys(this.$store.state.userWhoLikeThis).includes(
-          this.$store.state.loginUser
+        this.$store.state.userWhoLikeThis.some(
+          (item) => item.username === this.$store.state.loginUser
         )
       ) {
         return true;
@@ -90,19 +106,12 @@ export default {
         return false;
       }
     },
-    // likeUsersProfile(index) {
-    //   return this.$store.state.userWhoLikeThis[index].profileimage;
-    // },
-    // likeUsers() {
-    //   return this.$store.state.userWhoLikeThis;
-    // },
-    // likeUsersName(index) {
-    //   return this.$store.state.userWhoLikeThis[index].username;
-    // },
   },
   created() {
     this.clearData();
     this.getDetail();
+    console.log(Object.keys(this.$store.state.userWhoLikeThis[0])[0]);
+    console.log(typeof this.$store.state.loginUser);
   },
   methods: {
     getDetail() {
@@ -131,6 +140,12 @@ export default {
     },
     clearData() {
       this.$store.dispatch("clearData");
+    },
+    likeUsersProfile(index) {
+      return this.$store.state.userWhoLikeThis[index].profileimage;
+    },
+    profileImageURL(context) {
+      return `${Server_URL}${context}`;
     },
   },
 };

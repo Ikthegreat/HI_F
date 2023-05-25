@@ -10,6 +10,8 @@ import ProfileView from '@/views/ProfileView'
 import MovieDetailView from '@/views/MovieDetailView'
 import store from '../store/index'
 
+import ProfileCarousel from '@/components/ProfileCarousel'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -58,6 +60,11 @@ const routes = [
   {
     path: '/movie/:movieid',
     component: MovieDetailView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/test',
+    component: ProfileCarousel,
     meta: { requiresAuth: true },
   },
 ]
