@@ -66,6 +66,9 @@ export default new Vuex.Store({
     GET_WHO_LIKE_THIS(state, data) {
       state.userWhoLikeThis = data
     },
+    CLEAR_DATA(state) {
+      state.movieData = null
+    },
   },
   actions: {
     signUp(context, payload) {
@@ -204,7 +207,7 @@ export default new Vuex.Store({
     getDetail(context, movieId) {
       axios({
         method: "get",
-        url: `https://api.themoviedb.org/3/movie/${movieId}?language=ko`,
+        url: `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`,
         headers: {
           accept: "application/json",
           Authorization:
@@ -212,16 +215,18 @@ export default new Vuex.Store({
         },
       })
         .then((tmdbResponse) => {
+          console.log(tmdbResponse.data)
           context.commit("GET_DETAIL", tmdbResponse.data);
           return axios({
             method: "get",
             url: `${Server_URL}/main/${movieId}/`,
-          }).then((serverResponse) => {
-            context.commit("GET_WHO_LIKE_THIS", serverResponse.data)
           })
         })
+        .then((serverResponse) => {
+          context.commit("GET_WHO_LIKE_THIS", serverResponse.data)
+        })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data);
         });
     },
     getProfile(context, userName) {
@@ -253,7 +258,7 @@ export default new Vuex.Store({
           context.commit("GET_PHONE_MOVIE", response.data.title);
         })
         .catch(function (error) {
-          console.error(error);
+          console.log(error.response.data)
         });
     },
     getEmailMovie(context, num) {
@@ -273,9 +278,12 @@ export default new Vuex.Store({
           context.commit("GET_EMAIL_MOVIE", response.data.title);
         })
         .catch(function (error) {
-          console.error(error);
+          console.log(error.response.data)
         });
+    },
+    clearData(context) {
+      context.commit("CLEAR_DATA")
     },
   },
   modules: {},
-});
+})

@@ -37,7 +37,6 @@ export default {
   },
   data() {
     return {
-      // movies: this.$store.state.movies,
       movieListTag: [
         "님만을 위한 추천 영화",
         "님!! 다른 분들이 좋아하시는 영화도 모아왔어요!",
@@ -45,6 +44,7 @@ export default {
         "님이 당장 보시기에 좋은 영화",
       ],
       active: "guide",
+      percent: 0,
     };
   },
 };

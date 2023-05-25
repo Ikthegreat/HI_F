@@ -14,22 +14,26 @@
     <div>
       <!-- 이게 휴대폰 번호로 가져온 영화 제목 -->
       <h6>{{ userName }}님의 휴대폰 번호를 기반으로 추천하는 영화 제목</h6>
-      <router-link
-        id="link"
-        :to="`/movie/${userPhonenumber}`"
-        :event="userPhonenumber ? 'click' : ''"
-        >{{ phoneMovie }}</router-link
-      >
+      <div v-if="phoneMovie && userPhonenumber">
+        <router-link id="link" :to="`/movie/${userPhonenumber}`">{{
+          phoneMovie
+        }}</router-link>
+      </div>
+      <div v-else>
+        <h6>아쉽지만 해당하는 영화가 없습니다.</h6>
+      </div>
     </div>
     <br />
     <div>
       <h6>{{ userName }}님의 이메일 주소를 기반으로 추천하는 영화 제목</h6>
-      <router-link
-        id="link"
-        :to="`/movie/${userEmail}`"
-        :event="userEmail ? 'click' : ''"
-        >{{ EmailMovie }}</router-link
-      >
+      <div v-if="EmailMovie && userEmail">
+        <router-link id="link" :to="`/movie/${userEmail}`">{{
+          EmailMovie
+        }}</router-link>
+      </div>
+      <div v-else>
+        <h6>아쉽지만 해당하는 영화가 없습니다.</h6>
+      </div>
     </div>
 
     <vs-dialog width="300px" center v-model="active">
@@ -89,7 +93,7 @@ export default {
       return this.$store.state.phonenumber;
     },
     phoneMovie() {
-      if (this.$store.state.email) {
+      if (this.$store.state.phonenumber) {
         return this.$store.state.userPhonenumberMovieTitle;
       } else {
         return "정보가 없습니다.";
@@ -130,7 +134,7 @@ export default {
           this.$router.go(0);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data);
         });
     },
     getPhoneMovie() {
@@ -138,6 +142,15 @@ export default {
     },
     getEmailMovie() {
       this.$store.dispatch("getEmailMovie", this.userEmail);
+    },
+    unActivate(event) {
+      if (
+        this.$store.state.userEmailMovieTitle ==
+        "아쉽지만 해당하는 영화가 없습니다."
+      ) {
+        event.stopPropagation();
+        console.log(222);
+      }
     },
   },
   created() {
