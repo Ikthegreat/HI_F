@@ -26,6 +26,7 @@ export default new Vuex.Store({
     email: null,
     userPhonenumberMovieTitle: null,
     userEmailMovieTitle: null,
+    userWhoLikeThis: null,
   },
   getters: {
     isLogin(state) {
@@ -61,6 +62,9 @@ export default new Vuex.Store({
       if (data) {
         state.userEmailMovieTitle = data;
       }
+    },
+    GET_WHO_LIKE_THIS(state, data) {
+      state.userWhoLikeThis = data
     },
   },
   actions: {
@@ -200,15 +204,21 @@ export default new Vuex.Store({
     getDetail(context, movieId) {
       axios({
         method: "get",
-        url: `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`,
+        url: `https://api.themoviedb.org/3/movie/${movieId}?language=ko`,
         headers: {
           accept: "application/json",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YzQyNzExMDBjM2FjZGYyOTAxYTkxMjhiYjY4NzMwNiIsInN1YiI6IjYzZDIwNWMwNjZhZTRkMDA4YzkyMjMwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YcFHsAOJFOrOfOc0gBh22Q8y2_PaJOT3LCnLb0yerjc",
         },
       })
-        .then((response) => {
-          context.commit("GET_DETAIL", response.data);
+        .then((tmdbResponse) => {
+          context.commit("GET_DETAIL", tmdbResponse.data);
+          return axios({
+            method: "get",
+            url: `${Server_URL}/main/${movieId}/`,
+          }).then((serverResponse) => {
+            context.commit("GET_WHO_LIKE_THIS", serverResponse.data)
+          })
         })
         .catch((error) => {
           console.log(error);
