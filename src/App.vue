@@ -31,7 +31,7 @@ export default {
 <style>
 #app {
   text-align: center;
-  height: 937px;
+  min-height: 100vh;
   background-color: black;
   display: flex;
   justify-content: center;

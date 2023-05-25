@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <NavBar />
-    <div id="padding-scroll-content" class="square">
+    <div>
       <MovieList
         v-for="(value, index) in movies"
         :movieListTag="movieListTag[index]"
@@ -52,6 +52,8 @@ export default {
 
 <style scoped>
 #main {
+  padding-top: 70px;
   height: 100%;
+  width: 90%;
 }
 </style>

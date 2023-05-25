@@ -4,23 +4,21 @@
       <h3>본인 취향에 가까운 영화를 3가지 골라주세요</h3>
       <div>
         <table>
-          <tr
-            v-for="(item, index) in Math.ceil(movieList.length / 4)"
-            :key="index"
-          >
-            <td v-for="j in 4" :key="j">
-              <div v-if="movieList[index * 4 + (j - 1)]" id="card">
+          <tr v-for="(item, index) in 4" :key="index">
+            <td v-for="j in 5" :key="j">
+              <div v-if="movieList[index * 5 + (j - 1)]" id="card">
                 <img
-                  @click="movieSelect(movieList[index * 4 + (j - 1)].id)"
+                  @click="movieSelect(movieList[index * 5 + (j - 1)].id)"
                   :src="
-                    getPosterURL(movieList[index * 4 + (j - 1)].poster_path)
+                    getPosterURL(movieList[index * 5 + (j - 1)].poster_path)
                   "
                   alt=""
                   :class="{
                     selected: isMovieSelected(
-                      movieList[index * 4 + (j - 1)].id
+                      movieList[index * 5 + (j - 1)].id
                     ),
                   }"
+                  style="padding: 10px"
                 />
               </div>
             </td>
@@ -33,17 +31,18 @@
       style="
         display: flex;
         background-color: rgba(255, 255, 255, 0.5);
-        width: 280px;
-        height: 150px;
+        width: 250px;
+        height: 120px;
         justify-content: center;
         align-items: center;
-        border-radius: 10%;
+        flex-direction: column;
       "
     >
-      <vs-button id="button" success @click="selectComplete"
-        >제출하기</vs-button
-      >
-      <vs-button id="button" success @click="goBack">뒤로가기</vs-button>
+      <h6 class="mb-3 mt-3">이대로 제출하시겠습니까?</h6>
+      <div style="display: flex" class="mb-2">
+        <vs-button id="button" dark @click="selectComplete">제출하기</vs-button>
+        <vs-button id="button" dark @click="goBack">뒤로가기</vs-button>
+      </div>
     </div>
   </div>
 </template>
@@ -133,21 +132,18 @@ export default {
   width: 700px;
 }
 h3 {
-  color: #46c93a;
+  color: white;
   font-weight: bolder;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 5px;
 }
 img {
-  width: 120px;
-  height: 160px;
+  width: 130px;
+  height: 170px;
 }
 .selected {
-  border-style: dashed;
-  border-width: 3px;
-  border-color: #46c93a;
-}
-#button {
-  width: 100px;
-  height: 60px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
 }
 </style>

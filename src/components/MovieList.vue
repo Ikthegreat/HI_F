@@ -44,14 +44,16 @@ a {
 }
 h3 {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-left: 20px;
   text-align: start;
-  /* font-weight: bold; */
-  color: black;
+  color: white;
 }
 #movieList {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 10px;
   margin-bottom: 50px;
+  padding-bottom: 30px;
+  width: 100%;
 }
 </style>

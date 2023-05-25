@@ -1,7 +1,6 @@
 <template>
   <div id="card">
-    <img id="card-img" :src="movieImgURL" @click="moveToDetail(movie.id)" />
-    <h5>{{ movie.id }}</h5>
+    <img class="card-img" :src="movieImgURL" @click="moveToDetail(movie.id)" />
   </div>
 </template>
 
@@ -10,6 +9,9 @@ export default {
   name: "MovieListItem",
   props: {
     movie: Object,
+  },
+  data() {
+    return {};
   },
   methods: {
     moveToDetail(movieId) {
@@ -29,10 +31,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#card-img {
-  width: 100%;
-  height: 230px;
-  object-fit: contain;
+.card-img {
+  width: 300px;
+  height: 450px;
+  transition: transform 0.3s;
+}
+.card-img:hover {
+  transform: translateZ(50px) scale(1.25);
 }
 ul {
   list-style-type: none;

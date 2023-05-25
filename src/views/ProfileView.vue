@@ -18,8 +18,8 @@
     </div>
 
     <div style="display: flex">
-      <div id="coverbox">
-        <div>
+      <div>
+        <div id="coverbox" style="height: 20%; padding: auto">
           <h6>{{ userName }}님의 휴대폰 번호를 기반으로 추천하는 영화 제목</h6>
           <div v-if="phoneMovie && userPhonenumber">
             <router-link id="link" :to="`/movie/${userPhonenumber}`">{{
@@ -30,8 +30,8 @@
             <h6>아쉽지만 해당하는 영화가 없습니다.</h6>
           </div>
         </div>
-        <br />
-        <div>
+
+        <div id="coverbox" style="height: 50%">
           <h6>{{ userName }}님의 이메일 주소를 기반으로 추천하는 영화 제목</h6>
           <div v-if="EmailMovie && userEmail">
             <router-link id="link" :to="`/movie/${userEmail}`">{{
@@ -46,20 +46,32 @@
 
       <div id="coverbox" style="max-width: 50%">
         <h6>{{ userName }}님이 좋아하시는 영화</h6>
-        <swiper :options="swiperOption">
-          <div v-for="index in ProfileData.movies.length" :key="index">
-            <swiper-slide>
+        <b-carousel
+          id="carousel-1"
+          v-model="slide"
+          :interval="0"
+          controls
+          indicators
+          background="#ababab"
+          style="text-shadow: 1px 1px 2px #333"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
+        >
+          <b-carousel-slide
+            v-for="index in ProfileData.movies.length"
+            :key="index - 1"
+            style="width: 100%; height: 100%"
+          >
+            <template #img>
               <img
                 :src="getPosterURL(ProfileData.movies[index - 1].poster_path)"
                 alt=""
-                style="width: 120px"
                 @click="goDetail(ProfileData.movies[index - 1].id)"
+                style="width: 100%; height: 100%; object-fit: cover"
               />
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </div>
-        </swiper>
-
+            </template>
+          </b-carousel-slide>
+        </b-carousel>
         <!-- <div
           v-for="index in ProfileData.movies.length"
           :key="index"
@@ -103,8 +115,6 @@
 <script>
 import NavBar from "@/components/NavBar";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
 
 const Server_URL = "http://127.0.0.1:8000";
 
@@ -112,22 +122,14 @@ export default {
   name: "ProfileView",
   components: {
     NavBar,
-    Swiper,
-    SwiperSlide,
   },
   data() {
     return {
       profileImage: "",
       active: false,
       phonenumberMovie: "",
-      swiperOption: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      },
+      slide: 0,
+      sliding: null,
     };
   },
   computed: {
@@ -200,6 +202,12 @@ export default {
     goDetail(content) {
       this.$router.push(`/movie/${content}`);
     },
+    onSlideStart() {
+      this.sliding = true;
+    },
+    onSlideEnd() {
+      this.sliding = false;
+    },
   },
   created() {
     this.getProfile();
@@ -244,8 +252,5 @@ img {
   padding-top: 25px;
   background-color: rgba(255, 255, 255, 0.4);
   margin: 50px;
-}
-.swiper-pagination {
-  padding: 10px;
 }
 </style>
